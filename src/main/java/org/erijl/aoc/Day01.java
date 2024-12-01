@@ -18,8 +18,20 @@ public class Day01 {
         }
 
         long totalDistance = getTotalDistanceBetweenLists(leftSide, rightSide);
+        long similarityScore = calculateSimilarityScore(leftSide, rightSide);
 
-        System.out.println(totalDistance);
+        System.out.printf("TotalDistance: %d, SimilarityScore: %d%n", totalDistance, similarityScore);
+    }
+
+    private static long calculateSimilarityScore(List<Integer> leftSide, List<Integer> rightSide) {
+        long similarityScore = 0;
+
+        for (int leftNumber : leftSide) {
+            long occurrenceCount = rightSide.stream().filter(rightNumber -> rightNumber == leftNumber).count();
+            similarityScore += leftNumber * occurrenceCount;
+        }
+
+        return similarityScore;
     }
 
 
