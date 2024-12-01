@@ -11,12 +11,20 @@ public class Day01 {
         String input = getRawInput();
         List<Integer> leftSide = new ArrayList<>();
         List<Integer> rightSide = new ArrayList<>();
-
         for (String line : input.split("\r\n")) {
             String[] numbers = line.replace("   ", ";").split(";");
             leftSide.add(Integer.parseInt(numbers[0]));
             rightSide.add(Integer.parseInt(numbers[1]));
         }
+
+        long totalDistance = getTotalDistanceBetweenLists(leftSide, rightSide);
+
+        System.out.println(totalDistance);
+    }
+
+
+    private static long getTotalDistanceBetweenLists(List<Integer> leftSide, List<Integer> rightSide) {
+
         rightSide = rightSide.stream().sorted().collect(Collectors.toList());
         leftSide = leftSide.stream().sorted().collect(Collectors.toList());
 
@@ -27,7 +35,7 @@ public class Day01 {
             totalDistance += Math.abs(leftSide.get(i) - rightSide.get(i));
         }
 
-        System.out.println(totalDistance);
+        return totalDistance;
     }
 
     private static String getRawInput() {
